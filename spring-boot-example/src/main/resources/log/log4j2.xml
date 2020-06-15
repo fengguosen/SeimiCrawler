@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="info" monitorInterval="10">
+
+    <properties>
+        <property name="appId">cartoon-rawler</property>
+        <property name="log.format">[%d] [%t] [%X{trace_id}] %-5p %C:%method:%L:%L - %m%n</property>
+        <property name="log.name">cartoon-rawler</property>
+        <property name="druid.log.name">cartoon-crawler-slow-sql</property>
+        <property name="logpath">/data/logs/cartoon-crawler</property>
+    </properties>
+
+    <appenders>
+        <!--EsAppender 配置  -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout   pattern="${log.format}" />
+        </Console>
+
+        <RollingRandomAccessFile name="File"
+                                 fileName="${logpath}/${log.name}.log"
+                                 filePattern="${logpath}/${log.name}.log.%d{yyyy-MM-dd}-%i">
+            <PatternLayout pattern="${log.format}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" />
+                <SizeBasedTriggeringPolicy size="1024 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="slowSqlFile"
+                                 fileName="${logpath}/${druid.log.name}.log"
+                                 filePattern="${logpath}/${druid.log.name}.log.%d{yyyy-MM-dd}-%i">
+            <PatternLayout pattern="${log.format}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" />
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingRandomAccessFile>
+    </appenders>
+
+    <loggers>
+        <root level="info">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="File"/>
+             <!--<appender-ref ref="EsAppender"/>-->
+        </root>
+        <logger name="com.alibaba.druid" level="info" additivity="false">
+            <appender-ref ref="slowSqlFile" />
+        </logger>
+        <logger name="org.apache.flume" level="warn"/>
+    </loggers>
+
+</Configuration>

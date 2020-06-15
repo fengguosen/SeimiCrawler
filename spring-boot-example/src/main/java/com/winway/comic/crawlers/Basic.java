@@ -1,4 +1,4 @@
-package cn.wanghaomiao.seimi.crawlers;
+package com.winway.comic.crawlers;
 
 import cn.wanghaomiao.seimi.annotation.Crawler;
 import cn.wanghaomiao.seimi.def.BaseSeimiCrawler;

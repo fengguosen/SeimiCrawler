@@ -1,4 +1,4 @@
-package cn.wanghaomiao.seimi.controller;
+package com.winway.comic.controller;
 
 import cn.wanghaomiao.seimi.spring.common.CrawlerCache;
 import cn.wanghaomiao.seimi.struct.CrawlerModel;

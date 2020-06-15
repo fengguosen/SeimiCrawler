@@ -5,6 +5,7 @@ import cn.wanghaomiao.seimi.def.BaseSeimiCrawler;
 import cn.wanghaomiao.seimi.struct.Request;
 import cn.wanghaomiao.seimi.struct.Response;
 import org.seimicrawler.xpath.JXDocument;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class BasicWithScheduler extends BaseSeimiCrawler {
         }
     }
 
-//    @Scheduled(fixedDelay = 1000)
+    @Scheduled(fixedDelay = 1000)
     public void callByFixedTime(){
         logger.info("我是一个固定间隔调度器,1秒一次");
     }

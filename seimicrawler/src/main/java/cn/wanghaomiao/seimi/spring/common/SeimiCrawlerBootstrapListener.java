@@ -61,7 +61,7 @@ public class SeimiCrawlerBootstrapListener implements ApplicationListener<Contex
                 logger.info("Not find any crawler,may be you need to check.");
                 return;
             }
-            workersPool = Executors.newFixedThreadPool(Constants.BASE_THREAD_NUM * Runtime.getRuntime().availableProcessors() * CrawlerCache.getCrawlers().size());
+            workersPool = Executors.newFixedThreadPool(20);
             for (Class<? extends BaseSeimiCrawler> a : CrawlerCache.getCrawlers()) {
                 CrawlerModel crawlerModel = new CrawlerModel(a, context);
                 if (CrawlerCache.isExist(crawlerModel.getCrawlerName())) {
